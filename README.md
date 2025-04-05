@@ -40,15 +40,13 @@ head(players)
 ###  Data Cleaning and Preprocessing
 Raw data often includes unnecessary or inconsistent information, so cleaning is essential. In this step, we:
 
-##### Selected relevant columns
+##### Selected relevant columns and filter the gender column to only rows with "Male" and "Female"
 (`gender`, `played_hours`, `Age`) that are important for our analysis.
 
 ##select the columns that are focused on this analysis. 
 
 players_select<-players |>
     select(gender, Age, played_hours)
-
-# Filter the gender column to only rows with "Male" and "Female"
 
 players_filter <- players_select |>
     filter(gender != "Non-binary",gender != "Two-Spirited", gender !=  "Prefer not to say", gender != "Agender", gender != "Other" )｜>
@@ -61,7 +59,7 @@ players_summarize <- players_filter |>
     summarize(average_hr=mean(played_hours), na.rm=TRUE)
 players_summarize
 
-##A visualization (bar plot) that illustrate the the played hours for each age bewteen male and female
+#### A visualization (bar plot) of the relationship between played hours and age of female & male users
 options(repr.plot.width = 15, repr.plot.height = 15)
 
 players_plot <- players_filter |>
